@@ -28,12 +28,12 @@ class Tobara {
 	method estaGastado() = self.diasDesdeCompra()>1
 	method diasDesdeCompra() = (new Date() - fechaDeCompra).days()
 }
+class Sexy {
+	method puntuacion(persona) = if (persona.esSexy()) 15 else 2
+}
 class Careta {
 	const personaje
 	method puntuacion() = personaje.puntuacion()
 }
 object mickeyMouse { const property puntuacion = 8}
 object osoCarolina { const property puntuacion = 6}
-class Sexy {
-	method puntuacion(persona) = if (persona.esSexy()) 15 else 2
-}
