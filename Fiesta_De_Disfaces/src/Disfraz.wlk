@@ -1,7 +1,7 @@
 class Disfraz {
-	const nombre
+	const property nombre
 	const fechaConfeccion
-	var caracteristicas 
+	const caracteristicas = #{} //set
 	
 	constructor(name, fecha){
 		nombre=name
@@ -10,9 +10,12 @@ class Disfraz {
 	
 	method puntuacion(persona) = caracteristicas.sum{c=>c.puntuacion(persona)}
 	method antiguedad() = fechaConfeccion - new Date()
+	
+	/* Código boilerplate 
+	* method agregarCaracteristica(nuevaCaract) { caracteristicas.add(nuevaCaract) }
+	*/
 }
 
-object sinDisfraz { }
 /* Caracteristicas */
 class Gracioso {
 	var nivelDeGracia
@@ -24,16 +27,21 @@ class Gracioso {
 }
 class Tobara {
 	const fechaDeCompra
-	method puntuacion(persona) = if (self.estaGastado()) 5 else 3
-	method estaGastado() = self.diasDesdeCompra()>1
-	method diasDesdeCompra() = (new Date() - fechaDeCompra).days()
+	method puntuacion(persona) = if (self.fuecompradoConAnticipacion()) 5 else 3
+	method fuecompradoConAnticipacion() = self.diasDesdeCompra()>=2
+	// se asume HOY como día de la fiesta
+	method diasDesdeCompra() = (new Date().minusDays(fechaDeCompra)).days() 
 }
-class Sexy {
+object sexy {
 	method puntuacion(persona) = if (persona.esSexy()) 15 else 2
 }
 class Careta {
 	const personaje
 	method puntuacion() = personaje.puntuacion()
 }
-object mickeyMouse { const property puntuacion = 8}
-object osoCarolina { const property puntuacion = 6}
+class Personaje {
+	const property puntuacion
+	constructor(punt) {puntuacion=punt}
+}
+object mickeyMouse inherits Personaje(8) { }
+object osoCarolina inherits Personaje(6) { }
